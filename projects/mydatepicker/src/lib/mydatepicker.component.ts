@@ -29,7 +29,7 @@ const MMM = "mmm";
 
 export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy {
     @Input() options: IMyOptions;
-    @Input() locale: string;
+    @Input() locale = 'th';
     @Input() defaultMonth: string;
     @Input() selDate: string;
     @Input() placeholder: string;

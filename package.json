@@ -1,5 +1,5 @@
 {
-  "name": "mydatepicker-example",
+  "name": "@tanjaae/mydatepicker-example",
   "version": "9.0.2",
   "description": "Angular datepicker",
   "homepage": "https://kekeh.github.io/mydatepicker/",
@@ -20,6 +20,7 @@
     "build-lib": "node scripts/delete-dist-folder.js && ng build mydatepicker && node scripts/copy-artifacts.js",
     "build-all": "node scripts/delete-dist-folder.js && ng build mydatepicker && node scripts/copy-artifacts.js && ng build",
     "test-lib": "node scripts/delete-test-output-folder.js && ng test --code-coverage=true mydatepicker",
+    "publish": "npm publish --tag latest ./dist/mydatepicker",
     "e2e": "ng e2e"
   },
   "private": false,
