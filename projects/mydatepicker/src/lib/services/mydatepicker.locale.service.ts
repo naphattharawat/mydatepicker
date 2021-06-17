@@ -4,6 +4,14 @@ import { IMyLocales, IMyOptions } from "../interfaces/index";
 @Injectable()
 export class LocaleService {
     private locales: IMyLocales = {
+        "th": {
+            dayLabels: { su: "อา", mo: "จ", tu: "อ", we: "พ", th: "พฤ", fr: "ศ", sa: "ส" },
+            monthLabels: { 1: "ม.ค", 2: "ก.พ.", 3: "มี.ค.", 4: "เม.ย.", 5: "พ.ค.", 6: "มิ.ย.", 7: "ก.ค.", 8: "ส.ค.", 9: "ก.ย.", 10: "ต.ค.", 11: "พ.ย.", 12: "ธ.ค." },
+            dateFormat: "dd-mm-yyyy",
+            todayBtnTxt: "วันนี้",
+            firstDayOfWeek: "su",
+            sunHighlight: true
+        },
         "en": {
             dayLabels: {su: "Sun", mo: "Mon", tu: "Tue", we: "Wed", th: "Thu", fr: "Fri", sa: "Sat"},
             monthLabels: { 1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun", 7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec" },
@@ -259,14 +267,6 @@ export class LocaleService {
             firstDayOfWeek: "mo",
             sunHighlight: true
         },
-        "th": {
-            dayLabels: { su: "อา", mo: "จ", tu: "อ", we: "พ", th: "พฤ", fr: "ศ", sa: "ส" },
-            monthLabels: { 1: "ม.ค", 2: "ก.พ.", 3: "มี.ค.", 4: "เม.ย.", 5: "พ.ค.", 6: "มิ.ย.", 7: "ก.ค.", 8: "ส.ค.", 9: "ก.ย.", 10: "ต.ค.", 11: "พ.ย.", 12: "ธ.ค." },
-            dateFormat: "dd-mm-yyyy",
-            todayBtnTxt: "วันนี้",
-            firstDayOfWeek: "su",
-            sunHighlight: true
-        },
         "ko-kr": {
             dayLabels: {su: "일", mo: "월", tu: "화", we: "수", th: "목", fr: "금", sa: "토"},
             monthLabels: { 1: "1월", 2: "2월", 3: "3월", 4: "4월", 5: "5월", 6: "6월", 7: "7월", 8: "8월", 9: "9월", 10: "10월", 11: "11월", 12: "12월" },
@@ -371,6 +371,6 @@ export class LocaleService {
             return this.locales[locale];
         }
         // Default: en
-        return this.locales["en"];
+        return this.locales["th"];
     }
 }
