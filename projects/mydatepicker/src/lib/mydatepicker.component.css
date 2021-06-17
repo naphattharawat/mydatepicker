@@ -1,8 +1,6 @@
 .mydp {
     line-height: 1.1;
     display: inline-block;
-    position: absolute;
-    z-index: 99999999999;
 }
 
 .mydp * {
@@ -59,7 +57,7 @@
     position: absolute;
     padding: 0;
     border: 1px solid #CCC;
-    z-index: 100;
+    z-index: 999999999999;
     animation: selectorfadein 0.1s;
 }
 

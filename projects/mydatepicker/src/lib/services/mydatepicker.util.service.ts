@@ -19,7 +19,7 @@ export class UtilService {
     weekDays: Array<string> = ["su", "mo", "tu", "we", "th", "fr", "sa"];
 
     isDateValid(dateStr: string, dateFormat: string, minYear: number, maxYear: number, disableUntil: IMyDate, disableSince: IMyDate, disableWeekends: boolean, disableWeekDays: Array<string>, disableDays: Array<IMyDate>, disableDateRanges: Array<IMyDateRange>, monthLabels: IMyMonthLabels, enableDays: Array<IMyDate>): IMyDate {
-        let returnDate: IMyDate = {day: 0, month: 0, year: 0};
+        let returnDate: IMyDate = { day: 0, month: 0, year: 0 };
         let daysInMonth: Array<number> = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
         let isMonthStr: boolean = dateFormat.indexOf(MMM) !== -1;
         let delimeters: Array<string> = this.getDateFormatDelimeters(dateFormat);
@@ -34,7 +34,7 @@ export class UtilService {
                 return returnDate;
             }
 
-            let date: IMyDate = {year: year, month: month, day: day};
+            let date: IMyDate = { year: year, month: month, day: day };
 
             if (this.isDisabledDay(date, minYear, maxYear, disableUntil, disableSince, disableWeekends, disableWeekDays, disableDays, disableDateRanges, enableDays)) {
                 return returnDate;
@@ -67,13 +67,13 @@ export class UtilService {
 
         for (let i = 0; i < df.length; i++) {
             if (df[i].indexOf(YYYY) !== -1) {
-                da[0] = {value: ds[i], format: df[i]};
+                da[0] = { value: ds[i], format: df[i] };
             }
             if (df[i].indexOf(M) !== -1) {
-                da[1] = {value: ds[i], format: df[i]};
+                da[1] = { value: ds[i], format: df[i] };
             }
             if (df[i].indexOf(D) !== -1) {
-                da[2] = {value: ds[i], format: df[i]};
+                da[2] = { value: ds[i], format: df[i] };
             }
         }
         return da;
@@ -110,7 +110,7 @@ export class UtilService {
     }
 
     parseDefaultMonth(monthString: string): IMyMonth {
-        let month: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
+        let month: IMyMonth = { monthTxt: "", monthNbr: 0, year: 0 };
         if (monthString !== "") {
             let split = monthString.split(monthString.match(/[^0-9]/)[0]);
             month.monthNbr = split[0].length === 2 ? parseInt(split[0]) : parseInt(split[1]);
@@ -120,7 +120,29 @@ export class UtilService {
     }
 
     formatDate(date: IMyDate, dateFormat: string, monthLabels: IMyMonthLabels): string {
-        let formatted: string = dateFormat.replace(YYYY, String(date.year));
+        let formatted: string = dateFormat.replace(YYYY, String(+date.year + 543));
+
+        if (dateFormat.indexOf(MMM) !== -1) {
+            formatted = formatted.replace(MMM, monthLabels[date.month]);
+        }
+        else if (dateFormat.indexOf(MM) !== -1) {
+            formatted = formatted.replace(MM, this.preZero(date.month));
+        }
+        else {
+            formatted = formatted.replace(M, String(date.month));
+        }
+
+        if (dateFormat.indexOf(DD) !== -1) {
+            formatted = formatted.replace(DD, this.preZero(date.day));
+        }
+        else {
+            formatted = formatted.replace(D, String(date.day));
+        }
+        return formatted;
+    }
+
+    formatDateTH(date: IMyDate, dateFormat: string, monthLabels: IMyMonthLabels): string {
+        let formatted: string = dateFormat.replace(YYYY, String(+date.year + 543));
 
         if (dateFormat.indexOf(MMM) !== -1) {
             formatted = formatted.replace(MMM, monthLabels[date.month]);
@@ -199,17 +221,17 @@ export class UtilService {
         for (let md of markedDates) {
             for (let d of md.dates) {
                 if (d.year === date.year && d.month === date.month && d.day === date.day) {
-                    return {marked: true, color: md.color};
+                    return { marked: true, color: md.color };
                 }
             }
         }
         if (markWeekends && markWeekends.marked) {
             let dayNbr = this.getDayNumber(date);
             if (dayNbr === 0 || dayNbr === 6) {
-                return {marked: true, color: markWeekends.color};
+                return { marked: true, color: markWeekends.color };
             }
         }
-        return {marked: false, color: ""};
+        return { marked: false, color: "" };
     }
 
     isHighlightedDate(date: IMyDate, sunHighlight: boolean, satHighlight: boolean, highlightDates: Array<IMyDate>): boolean {

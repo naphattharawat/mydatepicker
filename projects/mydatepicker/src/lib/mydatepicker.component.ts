@@ -10,11 +10,11 @@ export const MYDP_VALUE_ACCESSOR: any = {
     multi: true
 };
 
-enum CalToggle {Open = 1, CloseByDateSel = 2, CloseByCalBtn = 3, CloseByOutClick = 4, CloseByEsc = 5, CloseByApi = 6}
-enum Year {min = 1000, max = 9999}
-enum InputFocusBlur {focus = 1, blur = 2}
-enum KeyCode {enter = 13, esc = 27, space = 32}
-enum MonthId {prev = 1, curr = 2, next = 3}
+enum CalToggle { Open = 1, CloseByDateSel = 2, CloseByCalBtn = 3, CloseByOutClick = 4, CloseByEsc = 5, CloseByApi = 6 }
+enum Year { min = 1000, max = 9999 }
+enum InputFocusBlur { focus = 1, blur = 2 }
+enum KeyCode { enter = 13, esc = 27, space = 32 }
+enum MonthId { prev = 1, curr = 2, next = 3 }
 
 const MMM = "mmm";
 
@@ -46,10 +46,13 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
     onChangeCb: (_: any) => void = () => { };
     onTouchedCb: () => void = () => { };
 
+    currentSysYear: number;
+    currentThaiYear: number;
+
     showSelector: boolean = false;
-    visibleMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
-    selectedMonth: IMyMonth = {monthTxt: "", monthNbr: 0, year: 0};
-    selectedDate: IMyDate = {year: 0, month: 0, day: 0};
+    visibleMonth: IMyMonth = { monthTxt: "", monthNbr: 0, year: 0 };
+    selectedMonth: IMyMonth = { monthTxt: "", monthNbr: 0, year: 0 };
+    selectedDate: IMyDate = { year: 0, month: 0, day: 0 };
     weekDays: Array<string> = [];
     dates: Array<IMyWeek> = [];
     months: Array<Array<IMyCalendarMonth>> = [];
@@ -75,62 +78,62 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
 
     // Default options
     opts: IMyOptions = {
-        dayLabels: <IMyDayLabels> {},
-        monthLabels: <IMyMonthLabels> {},
-        dateFormat: <string> "",
-        showTodayBtn: <boolean> true,
-        todayBtnTxt: <string> "",
-        firstDayOfWeek: <string> "",
-        satHighlight: <boolean> false,
-        sunHighlight: <boolean> true,
-        highlightDates: <Array<IMyDate>> [],
-        markCurrentDay: <boolean> true,
-        markCurrentMonth: <boolean> true,
-        markCurrentYear: <boolean> true,
-        disableUntil: <IMyDate> {year: 0, month: 0, day: 0},
-        disableSince: <IMyDate> {year: 0, month: 0, day: 0},
-        disableDays: <Array<IMyDate>> [],
-        enableDays: <Array<IMyDate>> [],
-        markDates: <Array<IMyMarkedDates>> [],
-        markWeekends: <IMyMarkedDate> {},
-        disableDateRanges: <Array<IMyDateRange>> [],
-        disableWeekends: <boolean> false,
-        disableWeekdays: <Array<string>> [],
-        showWeekNumbers: <boolean> false,
-        height: <string> "34px",
-        width: <string> "100%",
-        selectionTxtFontSize: <string> "14px",
-        selectorHeight: <string> "232px",
-        selectorWidth: <string> "252px",
-        allowDeselectDate: <boolean> false,
-        inline: <boolean> false,
-        showClearDateBtn: <boolean> true,
-        showDecreaseDateBtn: <boolean> false,
-        showIncreaseDateBtn: <boolean> false,
-        alignSelectorRight: <boolean> false,
-        openSelectorTopOfInput: <boolean> false,
-        indicateInvalidDate: <boolean> true,
-        editableDateField: <boolean> true,
-        monthSelector: <boolean> true,
-        yearSelector: <boolean> true,
-        disableHeaderButtons: <boolean> true,
-        minYear: <number> Year.min,
-        maxYear: <number> Year.max,
-        componentDisabled: <boolean> false,
-        showSelectorArrow: <boolean> true,
-        showInputField: <boolean> true,
-        openSelectorOnInputClick: <boolean> false,
-        allowSelectionOnlyInCurrentMonth: <boolean> true,
-        ariaLabelInputField: <string> "Date input field",
-        ariaLabelClearDate: <string> "Clear Date",
-        ariaLabelDecreaseDate: <string> "Decrease Date",
-        ariaLabelIncreaseDate: <string> "Increase Date",
-        ariaLabelOpenCalendar: <string> "Open Calendar",
-        ariaLabelPrevMonth: <string> "Previous Month",
-        ariaLabelNextMonth: <string> "Next Month",
-        ariaLabelPrevYear: <string> "Previous Year",
-        ariaLabelNextYear: <string> "Next Year",
-        ariaLabelDay: <string> "Select day"
+        dayLabels: <IMyDayLabels>{},
+        monthLabels: <IMyMonthLabels>{},
+        dateFormat: <string>"",
+        showTodayBtn: <boolean>true,
+        todayBtnTxt: <string>"",
+        firstDayOfWeek: <string>"",
+        satHighlight: <boolean>false,
+        sunHighlight: <boolean>true,
+        highlightDates: <Array<IMyDate>>[],
+        markCurrentDay: <boolean>true,
+        markCurrentMonth: <boolean>true,
+        markCurrentYear: <boolean>true,
+        disableUntil: <IMyDate>{ year: 0, month: 0, day: 0 },
+        disableSince: <IMyDate>{ year: 0, month: 0, day: 0 },
+        disableDays: <Array<IMyDate>>[],
+        enableDays: <Array<IMyDate>>[],
+        markDates: <Array<IMyMarkedDates>>[],
+        markWeekends: <IMyMarkedDate>{},
+        disableDateRanges: <Array<IMyDateRange>>[],
+        disableWeekends: <boolean>false,
+        disableWeekdays: <Array<string>>[],
+        showWeekNumbers: <boolean>false,
+        height: <string>"34px",
+        width: <string>"100%",
+        selectionTxtFontSize: <string>"14px",
+        selectorHeight: <string>"232px",
+        selectorWidth: <string>"252px",
+        allowDeselectDate: <boolean>false,
+        inline: <boolean>false,
+        showClearDateBtn: <boolean>true,
+        showDecreaseDateBtn: <boolean>false,
+        showIncreaseDateBtn: <boolean>false,
+        alignSelectorRight: <boolean>false,
+        openSelectorTopOfInput: <boolean>false,
+        indicateInvalidDate: <boolean>true,
+        editableDateField: <boolean>true,
+        monthSelector: <boolean>true,
+        yearSelector: <boolean>true,
+        disableHeaderButtons: <boolean>true,
+        minYear: <number>Year.min,
+        maxYear: <number>Year.max,
+        componentDisabled: <boolean>false,
+        showSelectorArrow: <boolean>true,
+        showInputField: <boolean>true,
+        openSelectorOnInputClick: <boolean>false,
+        allowSelectionOnlyInCurrentMonth: <boolean>true,
+        ariaLabelInputField: <string>"Date input field",
+        ariaLabelClearDate: <string>"Clear Date",
+        ariaLabelDecreaseDate: <string>"Decrease Date",
+        ariaLabelIncreaseDate: <string>"Increase Date",
+        ariaLabelOpenCalendar: <string>"Open Calendar",
+        ariaLabelPrevMonth: <string>"Previous Month",
+        ariaLabelNextMonth: <string>"Next Month",
+        ariaLabelPrevYear: <string>"Previous Year",
+        ariaLabelNextYear: <string>"Next Year",
+        ariaLabelDay: <string>"Select day"
     };
 
     constructor(public elem: ElementRef, private cdr: ChangeDetectorRef, private localeService: LocaleService, private utilService: UtilService) {
@@ -183,9 +186,9 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
             for (let i = 1; i <= 12; i += 3) {
                 let row: Array<IMyCalendarMonth> = [];
                 for (let j = i; j < i + 3; j++) {
-                    let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({year: this.visibleMonth.year, month: j, day: this.daysInMonth(j, this.visibleMonth.year)}, this.opts.disableUntil)
-                        || this.utilService.isMonthDisabledByDisableSince({year: this.visibleMonth.year, month: j, day: 1}, this.opts.disableSince);
-                    row.push({nbr: j, name: this.opts.monthLabels[j], currMonth: j === today.month && this.visibleMonth.year === today.year, selected: j === this.visibleMonth.monthNbr, disabled: disabled});
+                    let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({ year: this.visibleMonth.year, month: j, day: this.daysInMonth(j, this.visibleMonth.year) }, this.opts.disableUntil)
+                        || this.utilService.isMonthDisabledByDisableSince({ year: this.visibleMonth.year, month: j, day: 1 }, this.opts.disableSince);
+                    row.push({ nbr: j, name: this.opts.monthLabels[j], currMonth: j === today.month && this.visibleMonth.year === today.year, selected: j === this.visibleMonth.monthNbr, disabled: disabled });
                 }
                 this.months.push(row);
             }
@@ -194,8 +197,9 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
 
     onMonthCellClicked(cell: IMyCalendarMonth): void {
         let mc: boolean = cell.nbr !== this.visibleMonth.monthNbr;
-        this.visibleMonth = {monthTxt: this.monthText(cell.nbr), monthNbr: cell.nbr, year: this.visibleMonth.year};
-        this.generateCalendar(cell.nbr, this.visibleMonth.year, mc);
+        this.visibleMonth = { monthTxt: this.monthText(cell.nbr), monthNbr: cell.nbr, year: this.visibleMonth.year };
+        let thaiYear = this.visibleMonth.year - 543;
+        this.generateCalendar(cell.nbr, thaiYear, mc);
         this.selectMonth = false;
         this.selectorEl.nativeElement.focus();
     }
@@ -219,8 +223,9 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
 
     onYearCellClicked(cell: IMyCalendarYear): void {
         let yc: boolean = cell.year !== this.visibleMonth.year;
-        this.visibleMonth = {monthTxt: this.visibleMonth.monthTxt, monthNbr: this.visibleMonth.monthNbr, year: cell.year};
-        this.generateCalendar(this.visibleMonth.monthNbr, cell.year, yc);
+        this.visibleMonth = { monthTxt: this.visibleMonth.monthTxt, monthNbr: this.visibleMonth.monthNbr, year: cell.year };
+        let thYear = cell.year - 543;
+        this.generateCalendar(this.visibleMonth.monthNbr, thYear, yc);
         this.selectYear = false;
         this.selectorEl.nativeElement.focus();
     }
@@ -248,15 +253,15 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
         for (let i = year; i <= 20 + year; i += 5) {
             let row: Array<IMyCalendarYear> = [];
             for (let j = i; j < i + 5; j++) {
-                let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({year: j, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, j)}, this.opts.disableUntil)
-                 || this.utilService.isMonthDisabledByDisableSince({year: j, month: this.visibleMonth.monthNbr, day: 1}, this.opts.disableSince);
+                let disabled: boolean = this.utilService.isMonthDisabledByDisableUntil({ year: j, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, j) }, this.opts.disableUntil)
+                    || this.utilService.isMonthDisabledByDisableSince({ year: j, month: this.visibleMonth.monthNbr, day: 1 }, this.opts.disableSince);
                 let minMax: boolean = j < this.opts.minYear || j > this.opts.maxYear;
-                row.push({year: j, currYear: j === today.year, selected: j === this.visibleMonth.year, disabled: disabled || minMax});
+                row.push({ year: j, currYear: j === today.year, selected: j === this.visibleMonth.year, disabled: disabled || minMax });
             }
             this.years.push(row);
         }
-        this.prevYearsDisabled = this.years[0][0].year <= this.opts.minYear || this.utilService.isMonthDisabledByDisableUntil({year: this.years[0][0].year - 1, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, this.years[0][0].year - 1)}, this.opts.disableUntil);
-        this.nextYearsDisabled = this.years[4][4].year >= this.opts.maxYear || this.utilService.isMonthDisabledByDisableSince({year: this.years[4][4].year + 1, month: this.visibleMonth.monthNbr, day: 1}, this.opts.disableSince);
+        this.prevYearsDisabled = this.years[0][0].year <= this.opts.minYear || this.utilService.isMonthDisabledByDisableUntil({ year: this.years[0][0].year - 1, month: this.visibleMonth.monthNbr, day: this.daysInMonth(this.visibleMonth.monthNbr, this.years[0][0].year - 1) }, this.opts.disableUntil);
+        this.nextYearsDisabled = this.years[4][4].year >= this.opts.maxYear || this.utilService.isMonthDisabledByDisableSince({ year: this.years[4][4].year + 1, month: this.visibleMonth.monthNbr, day: 1 }, this.opts.disableSince);
     }
 
     onUserDateInput(value: string): void {
@@ -285,13 +290,13 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
     }
 
     onFocusInput(event: any): void {
-        this.inputFocusBlur.emit({reason: InputFocusBlur.focus, value: event.target.value});
+        this.inputFocusBlur.emit({ reason: InputFocusBlur.focus, value: event.target.value });
     }
 
     onBlurInput(event: any): void {
         this.selectionDayTxt = event.target.value;
         this.onTouchedCb();
-        this.inputFocusBlur.emit({reason: InputFocusBlur.blur, value: event.target.value});
+        this.inputFocusBlur.emit({ reason: InputFocusBlur.blur, value: event.target.value });
     }
 
     onCloseSelector(event: any): void {
@@ -299,13 +304,13 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
             this.removeGlobalListener();
 
             this.calendarToggle.emit(CalToggle.CloseByEsc);
-            this.showSelector = false; 
+            this.showSelector = false;
         }
     }
 
     invalidInputFieldChanged(value: string): void {
         this.invalidDate = value.length > 0;
-        this.inputFieldChanged.emit({value: value, dateFormat: this.opts.dateFormat, valid: false});
+        this.inputFieldChanged.emit({ value: value, dateFormat: this.opts.dateFormat, valid: false });
         this.onChangeCb(null);
         this.onTouchedCb();
     }
@@ -336,16 +341,16 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
             this.selectedDate = value["date"] ? this.parseSelectedDate(value["date"]) : value["jsdate"] ? this.parseSelectedDate(this.jsDateToMyDate(value["jsdate"])) : this.parseSelectedDate(value["formatted"]);
             let cvc: boolean = this.visibleMonth.year !== this.selectedDate.year || this.visibleMonth.monthNbr !== this.selectedDate.month;
             if (cvc) {
-                this.visibleMonth = {monthTxt: this.opts.monthLabels[this.selectedDate.month], monthNbr: this.selectedDate.month, year: this.selectedDate.year};
+                this.visibleMonth = { monthTxt: this.opts.monthLabels[this.selectedDate.month], monthNbr: this.selectedDate.month, year: this.selectedDate.year };
                 this.generateCalendar(this.selectedDate.month, this.selectedDate.year, cvc);
             }
             this.selectionDayTxt = this.utilService.formatDate(this.selectedDate, this.opts.dateFormat, this.opts.monthLabels);
         }
         else if (value === null || value === "") {
-            this.selectedDate = {year: 0, month: 0, day: 0};
+            this.selectedDate = { year: 0, month: 0, day: 0 };
             this.selectionDayTxt = "";
         }
-        this.inputFieldChanged.emit({value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: this.selectionDayTxt.length > 0});
+        this.inputFieldChanged.emit({ value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: this.selectionDayTxt.length > 0 });
         this.invalidDate = false;
     }
 
@@ -413,7 +418,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
                 this.selectedMonth = this.parseSelectedMonth(dm);
             }
             else {
-                this.selectedMonth = {monthTxt: "", monthNbr: 0, year: 0};
+                this.selectedMonth = { monthTxt: "", monthNbr: 0, year: 0 };
             }
             dmChange = true;
         }
@@ -527,7 +532,8 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
             y = this.selectedDate.year;
             m = this.selectedDate.month;
         }
-        this.visibleMonth = {monthTxt: this.opts.monthLabels[m], monthNbr: m, year: y};
+        const thaiYear = y + 543;
+        this.visibleMonth = { monthTxt: this.opts.monthLabels[m], monthNbr: m, year: thaiYear };
 
         // Create current month
         this.generateCalendar(m, y, true);
@@ -535,46 +541,57 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
 
     onPrevMonth(): void {
         // Previous month from calendar
+        this.currentSysYear = this.visibleMonth.year - 543;
         let d: Date = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() - 1);
 
         let y: number = d.getFullYear();
         let m: number = d.getMonth() + 1;
 
-        this.visibleMonth = {monthTxt: this.monthText(m), monthNbr: m, year: y};
+        this.currentThaiYear = y + 543;
+        this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: this.currentThaiYear };
         this.generateCalendar(m, y, true);
     }
 
     onNextMonth(): void {
         // Next month from calendar
-        let d: Date = this.getDate(this.visibleMonth.year, this.visibleMonth.monthNbr, 1);
+        this.currentSysYear = this.visibleMonth.year - 543;
+
+        let d: Date = this.getDate(this.currentSysYear, this.visibleMonth.monthNbr, 1);
         d.setMonth(d.getMonth() + 1);
 
         let y: number = d.getFullYear();
         let m: number = d.getMonth() + 1;
 
-        this.visibleMonth = {monthTxt: this.monthText(m), monthNbr: m, year: y};
+        this.currentThaiYear = y + 543;
+        this.visibleMonth = { monthTxt: this.monthText(m), monthNbr: m, year: this.currentThaiYear };
         this.generateCalendar(m, y, true);
     }
 
     onPrevYear(): void {
         // Previous year from calendar
+        this.currentSysYear = this.visibleMonth.year - 543;
         this.visibleMonth.year--;
-        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year, true);
+        this.currentSysYear--;
+        this.generateCalendar(this.visibleMonth.monthNbr, this.currentSysYear, true);
     }
 
     onNextYear(): void {
         // Next year from calendar
+        this.currentSysYear = this.visibleMonth.year - 543;
         this.visibleMonth.year++;
-        this.generateCalendar(this.visibleMonth.monthNbr, this.visibleMonth.year, true);
+        this.currentSysYear++;
+        this.generateCalendar(this.visibleMonth.monthNbr, this.currentSysYear, true);
     }
 
     onTodayClicked(): void {
         // Today button clicked
         let today: IMyDate = this.getToday();
+        this.currentSysYear = this.visibleMonth.year - 543;
+        this.currentThaiYear = today.year + 543;
         this.selectDate(today, CalToggle.CloseByDateSel);
-        if (this.opts.inline && today.year !== this.visibleMonth.year || today.month !== this.visibleMonth.monthNbr) {
-            this.visibleMonth = {monthTxt: this.opts.monthLabels[today.month], monthNbr: today.month, year: today.year};
+        if (this.opts.inline && today.year !== this.currentSysYear || today.month !== this.visibleMonth.monthNbr) {
+            this.visibleMonth = { monthTxt: this.opts.monthLabels[today.month], monthNbr: today.month, year: this.currentThaiYear };
             this.generateCalendar(today.month, today.year, true);
         }
     }
@@ -617,7 +634,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
 
     clearDate(): void {
         // Clears the date
-        this.updateDateValue({year: 0, month: 0, day: 0});
+        this.updateDateValue({ year: 0, month: 0, day: 0 });
         this.setFocusToInputBox();
     }
 
@@ -627,7 +644,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
         if (this.utilService.isInitializedDate(date)) {
             let d: Date = this.getDate(date.year, date.month, date.day);
             d.setDate(decrease ? d.getDate() - 1 : d.getDate() + 1);
-            date = {year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate()};
+            date = { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
         }
         else {
             date = this.getToday();
@@ -662,8 +679,10 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
         this.emitDateChanged(date);
 
         if (!this.opts.inline) {
-            this.selectionDayTxt = clear ? "" : this.utilService.formatDate(date, this.opts.dateFormat, this.opts.monthLabels);
-            this.inputFieldChanged.emit({value: this.selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear});
+
+            const selectionDayTxt = clear ? "" : this.utilService.formatDate(date, this.opts.dateFormat, this.opts.monthLabels);
+            this.selectionDayTxt = clear ? "" : this.utilService.formatDateTH(date, this.opts.dateFormat, this.opts.monthLabels);
+            this.inputFieldChanged.emit({ value: selectionDayTxt, dateFormat: this.opts.dateFormat, valid: !clear });
             this.invalidDate = false;
         }
     }
@@ -676,7 +695,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
             this.onTouchedCb();
         }
         else {
-            this.dateChanged.emit({date: date, jsdate: null, formatted: "", epoc: 0});
+            this.dateChanged.emit({ date: date, jsdate: null, formatted: "", epoc: 0 });
             this.onChangeCb(null);
             this.onTouchedCb();
         }
@@ -684,7 +703,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
 
     getDateModel(date: IMyDate): IMyDateModel {
         // Creates a date model object from the given parameter
-        return {date: date, jsdate: this.getDate(date.year, date.month, date.day), formatted: this.utilService.formatDate(date, this.opts.dateFormat, this.opts.monthLabels), epoc: Math.round(this.getTimeInMilliseconds(date) / 1000.0)};
+        return { date: date, jsdate: this.getDate(date.year, date.month, date.day), formatted: this.utilService.formatDate(date, this.opts.dateFormat, this.opts.monthLabels), epoc: Math.round(this.getTimeInMilliseconds(date) / 1000.0) };
     }
 
     monthText(m: number): string {
@@ -721,7 +740,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
 
     getToday(): IMyDate {
         let date: Date = new Date();
-        return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
+        return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
     }
 
     getTimeInMilliseconds(date: IMyDate): number {
@@ -760,22 +779,26 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
                 let pm = dInPrevM - monthStart + 1;
                 // Previous month
                 for (let j = pm; j <= dInPrevM; j++) {
-                    let date: IMyDate = {year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: j};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today),
+                    let date: IMyDate = { year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: j };
+                    week.push({
+                        dateObj: date, cmo: cmo, currDay: this.isCurrDay(j, m, y, cmo, today),
                         disabled: this.utilService.isDisabledDay(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
                         markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
-                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)
+                    });
                 }
 
                 cmo = this.currMonthId;
                 // Current month
                 let daysLeft: number = 7 - week.length;
                 for (let j = 0; j < daysLeft; j++) {
-                    let date: IMyDate = {year: y, month: m, day: dayNbr};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                    let date: IMyDate = { year: y, month: m, day: dayNbr };
+                    week.push({
+                        dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         disabled: this.utilService.isDisabledDay(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
                         markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
-                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)
+                    });
                     dayNbr++;
                 }
             }
@@ -787,38 +810,40 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
                         dayNbr = 1;
                         cmo = this.nextMonthId;
                     }
-                    let date: IMyDate = {year: cmo === this.nextMonthId && m === 12 ? y + 1 : y, month: cmo === this.currMonthId ? m : cmo === this.nextMonthId && m < 12 ? m + 1 : 1, day: dayNbr};
-                    week.push({dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
+                    let date: IMyDate = { year: cmo === this.nextMonthId && m === 12 ? y + 1 : y, month: cmo === this.currMonthId ? m : cmo === this.nextMonthId && m < 12 ? m + 1 : 1, day: dayNbr };
+                    week.push({
+                        dateObj: date, cmo: cmo, currDay: this.isCurrDay(dayNbr, m, y, cmo, today),
                         disabled: this.utilService.isDisabledDay(date, this.opts.minYear, this.opts.maxYear, this.opts.disableUntil, this.opts.disableSince, this.opts.disableWeekends, this.opts.disableWeekdays, this.opts.disableDays, this.opts.disableDateRanges, this.opts.enableDays),
                         markedDate: this.utilService.isMarkedDate(date, this.opts.markDates, this.opts.markWeekends),
-                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)});
+                        highlight: this.utilService.isHighlightedDate(date, this.opts.sunHighlight, this.opts.satHighlight, this.opts.highlightDates)
+                    });
                     dayNbr++;
                 }
             }
-            let weekNbr: number = this.opts.showWeekNumbers  && this.opts.firstDayOfWeek === "mo" ? this.utilService.getWeekNumber(week[0].dateObj) : 0;
-            this.dates.push({week: week, weekNbr: weekNbr});
+            let weekNbr: number = this.opts.showWeekNumbers && this.opts.firstDayOfWeek === "mo" ? this.utilService.getWeekNumber(week[0].dateObj) : 0;
+            this.dates.push({ week: week, weekNbr: weekNbr });
         }
 
         this.setHeaderBtnDisabledState(m, y);
 
         if (notifyChange) {
             // Notify parent
-            this.calendarViewChanged.emit({year: y, month: m, first: {number: 1, weekday: this.getWeekday({year: y, month: m, day: 1})}, last: {number: dInThisM, weekday: this.getWeekday({year: y, month: m, day: dInThisM})}});
+            this.calendarViewChanged.emit({ year: y, month: m, first: { number: 1, weekday: this.getWeekday({ year: y, month: m, day: 1 }) }, last: { number: dInThisM, weekday: this.getWeekday({ year: y, month: m, day: dInThisM }) } });
         }
     }
 
     parseSelectedDate(selDate: any): IMyDate {
         // Parse date value - it can be string or IMyDate object
-        let date: IMyDate = {day: 0, month: 0, year: 0};
+        let date: IMyDate = { day: 0, month: 0, year: 0 };
         if (typeof selDate === "string") {
-            let sd: string = <string> selDate;
+            let sd: string = <string>selDate;
             let df: string = this.opts.dateFormat;
 
             let delimeters: Array<string> = this.utilService.getDateFormatDelimeters(df);
             let dateValue: Array<IMyDateFormat> = this.utilService.getDateValue(sd, df, delimeters);
             date.year = this.utilService.getNumberByValue(dateValue[0]);
             date.month = df.indexOf(MMM) !== -1 ? this.utilService.getMonthNumberByMonthName(dateValue[1], this.opts.monthLabels) : this.utilService.getNumberByValue(dateValue[1]);
-            date.day  = this.utilService.getNumberByValue(dateValue[2]);
+            date.day = this.utilService.getNumberByValue(dateValue[2]);
         }
         else if (typeof selDate === "object") {
             date = selDate;
@@ -828,7 +853,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
     }
 
     jsDateToMyDate(date: Date): IMyDate {
-        return {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
+        return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
     }
 
     parseSelectedMonth(ms: string): IMyMonth {
@@ -841,10 +866,10 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor, OnDestroy 
         let dnm: boolean = false;
         let dny: boolean = false;
         if (this.opts.disableHeaderButtons) {
-            dpm = this.utilService.isMonthDisabledByDisableUntil({year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: this.daysInMonth(m === 1 ? 12 : m - 1, m === 1 ? y - 1 : y)}, this.opts.disableUntil);
-            dpy = this.utilService.isMonthDisabledByDisableUntil({year: y - 1, month: m, day: this.daysInMonth(m, y - 1)}, this.opts.disableUntil);
-            dnm = this.utilService.isMonthDisabledByDisableSince({year: m === 12 ? y + 1 : y, month: m === 12 ? 1 : m + 1, day: 1}, this.opts.disableSince);
-            dny = this.utilService.isMonthDisabledByDisableSince({year: y + 1, month: m, day: 1}, this.opts.disableSince);
+            dpm = this.utilService.isMonthDisabledByDisableUntil({ year: m === 1 ? y - 1 : y, month: m === 1 ? 12 : m - 1, day: this.daysInMonth(m === 1 ? 12 : m - 1, m === 1 ? y - 1 : y) }, this.opts.disableUntil);
+            dpy = this.utilService.isMonthDisabledByDisableUntil({ year: y - 1, month: m, day: this.daysInMonth(m, y - 1) }, this.opts.disableUntil);
+            dnm = this.utilService.isMonthDisabledByDisableSince({ year: m === 12 ? y + 1 : y, month: m === 12 ? 1 : m + 1, day: 1 }, this.opts.disableSince);
+            dny = this.utilService.isMonthDisabledByDisableSince({ year: y + 1, month: m, day: 1 }, this.opts.disableSince);
         }
         this.prevMonthDisabled = m === 1 && y === this.opts.minYear || dpm;
         this.prevYearDisabled = y - 1 < this.opts.minYear || dpy;
